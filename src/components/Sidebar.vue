@@ -7,6 +7,7 @@
     <!--aca esta los link para el nav  desde aca sale todo para el router-nuew-->
  <li><router-link to="/Contador">Contador</router-link></li>
  <li><router-link to="/lista-de-tareas">Lista De Tareas</router-link></li>
+ <li><router-link to="/registrar">Registrar</router-link></li>
 </ul> 
 </div>
  
