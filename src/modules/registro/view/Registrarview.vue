@@ -12,13 +12,17 @@
     
       <div class="form">
       <label for="nombre">Nombre</label>
-       <Field type="text" name="nombre" id="nombre" placeholder="ingrese su nombre"/>
+      
+      <!--el v.model viene por la función de piñia  y
+      es lo que le que le dice al formulario que viene de las const nombre / email -->
+       
+      <Field v-model="nombre" type="text" name="nombre" id="nombre" placeholder="ingrese su nombre"/>
        <ErrorMessage name="nombre"></ErrorMessage>
     </div>
     
     <div class="form">
        <label for="correo">correo</label>
-       <Field type="email" name="email" id="correo" placeholder="increse su email"/>
+       <Field  v-model="email" type="email" name="email" id="correo" placeholder="increse su email"/>
        <ErrorMessage name="email"></ErrorMessage>
      </div>
     
@@ -33,8 +37,26 @@
 <script setup>
 import { Form, Field , ErrorMessage} from 'vee-validate';
 import { schema } from '../schema/validationSchema';
-const onSubmit = () => {
-   console.log('Se ha enviado el formulario');
+
+ //importancion de userRegistarStore es para los cambios de pinia
+ //importamos y luego creamos la funcione para que funcione 
+
+ import { useRegistrarStore } from '../stores/registrarStore';
+import {ref} from 'vue';
+
+const registrarStore = useRegistrarStore () ;
+ 
+//estas 2 const son por que en  registrarSotre.guardar
+//Registro me pide los 2 parametros para inicar
+
+const nombre = ref('');
+const email = ref('');
+
+// en onSumit llamaos la funcion que nos permite guardar el registro 
+function onSubmit() {
+  // usamos nombre.value despues de crear al v-model 
+  registrarStore.guardarRegistro(nombre.value , email.value);
+  console.log('Se ha enviado el formulario');
 }
 
 </script>
